@@ -34,11 +34,6 @@ public class CompanyController {
 
         List<Company> companies = companyService.findAll();
 
-        for(Company company: companies) {
-            List<Owner> owners = ownerService.getCompanyOwners(company);
-            company.setOwners(owners);
-        }
-
         LOGGER.debug("<< listAllCompanies");
 
         return new ResponseEntity<List<Company>>(companies, HttpStatus.OK);
