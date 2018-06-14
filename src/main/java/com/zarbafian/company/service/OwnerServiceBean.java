@@ -1,7 +1,6 @@
 package com.zarbafian.company.service;
 
 import com.zarbafian.company.dao.OwnerRepository;
-import com.zarbafian.company.model.Company;
 import com.zarbafian.company.model.Owner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,17 +68,5 @@ public class OwnerServiceBean implements OwnerService {
         ownerRepository.deleteById(id);
 
         LOGGER.debug("<< delete : {}", id);
-    }
-
-    @Override
-    public List<Owner> getCompanyOwners(Company company) {
-
-        LOGGER.debug(">> getCompanyOwners : {}", company);
-
-        List<Owner> owners = ownerRepository.getCompanyOwners(company);
-
-        LOGGER.debug(">> getCompanyOwners : {}", company);
-
-        return owners;
     }
 }

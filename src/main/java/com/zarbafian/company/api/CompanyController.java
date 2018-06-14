@@ -160,4 +160,46 @@ public class CompanyController {
         return true;
     }
 
+    @RequestMapping(
+            value = "/api/companies/{id}/owners",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Company> addOwnerToCompany(@PathVariable(value = "id") Long companyId, @RequestBody Owner owner) {
+
+        LOGGER.debug(">> addOwnerToCompany");
+
+        // id should not be null
+        if(companyId == null) {
+            return new ResponseEntity<Company>(HttpStatus.BAD_REQUEST);
+        }
+
+        // owner id should not be null
+        if(owner.getId() == null) {
+            return new ResponseEntity<Company>(HttpStatus.BAD_REQUEST);
+        }
+
+        Owner ownerEntity = ownerService.findOne(owner.getId());
+
+        // check owner exists
+        if(ownerEntity == null) {
+            return new ResponseEntity<Company>(HttpStatus.BAD_REQUEST);
+        }
+
+        Company companyEntity = companyService.findOne(companyId);
+
+        // check company exists
+        if(companyEntity == null) {
+            return new ResponseEntity<Company>(HttpStatus.BAD_REQUEST);
+        }
+
+        companyEntity.getOwners().add(ownerEntity);
+
+        Company updatedEntity = companyService.update(companyEntity);
+
+        LOGGER.debug("<< addOwnerToCompany");
+
+        return new ResponseEntity<Company>(updatedEntity, HttpStatus.CREATED);
+    }
 }

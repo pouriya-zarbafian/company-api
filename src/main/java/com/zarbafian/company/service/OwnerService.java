@@ -16,6 +16,4 @@ public interface OwnerService {
     Owner update(Owner owner);
 
     void delete(Long id);
-
-    List<Owner> getCompanyOwners(Company company);
 }

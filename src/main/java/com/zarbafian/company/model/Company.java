@@ -4,6 +4,8 @@ package com.zarbafian.company.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.zarbafian.company.api.CompanySerializer;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -25,6 +27,7 @@ import java.util.List;
 )
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Company.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonSerialize(using = CompanySerializer.class)
 public class Company {
 
     @Id
