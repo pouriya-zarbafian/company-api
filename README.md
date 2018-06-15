@@ -46,4 +46,4 @@ This can be done by adding Spring authentication and configuring the appropriate
 
 ## High availability
 
-To achieve high-availability, both the database and the web server should be reduntant. Database redundancy can be achieved with a cluster a replicated and in-sync databases (e.g. HA-JDBC or Cassandra). Web server redundancy can be achieved by replicating the web server nodes. This would require a front load balancer to dispatch requests to the live nodes. To use this configuration with caching the server nodes must be configured to use a distributed cache such as Ehcache or Hazelcast.
+To achieve high-availability, both the database and the web server should be reduntant. Database redundancy can be achieved with a cluster of replicated and in-sync databases (e.g. HA-JDBC or Cassandra). Web server redundancy can be achieved by replicating the web server nodes. This would require a front load balancer to dispatch requests to the live nodes. To use this configuration with caching the server nodes must be configured to use a distributed cache such as Ehcache or Hazelcast.

@@ -42,7 +42,7 @@ public class CompanySerializer extends StdSerializer<Company> {
             jsonGenerator.writeStringField("email", company.getEmail());
         }
         if(company.getPhoneNumber() != null){
-            jsonGenerator.writeStringField("phone", company.getPhoneNumber());
+            jsonGenerator.writeStringField("phoneNumber", company.getPhoneNumber());
         }
 
         if(company.getOwners() != null) {

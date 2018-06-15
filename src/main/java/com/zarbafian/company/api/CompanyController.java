@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class CompanyController {
 
@@ -26,7 +27,9 @@ public class CompanyController {
     private OwnerService ownerService;
 
     @RequestMapping(
-            value = "/api/companies"
+            value = "/api/companies",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<Company>> listAllCompanies(){
 
@@ -197,6 +200,22 @@ public class CompanyController {
         return new ResponseEntity<Company>(updatedEntity, HttpStatus.CREATED);
     }
 
+    @RequestMapping(
+            value = "/api/owners",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<Owner>> listAllOwners(){
+
+        LOGGER.debug(">> listAllOwners");
+
+        List<Owner> owners = ownerService.findAll();
+
+        LOGGER.debug("<< listAllOwners");
+
+        return new ResponseEntity<>(owners, HttpStatus.OK);
+    }
+
     private boolean isDataValid(Company company) {
 
         if(isNullOrEmpty(company.getName()) || isNullOrEmpty(company.getAddress()) || isNullOrEmpty(company.getCountry()) || isNullOrEmpty(company.getCity())) {
@@ -204,7 +223,7 @@ public class CompanyController {
         }
 
         // at least one beneficial owner is required
-        if(company.getOwners().size() < 1) {
+        if(company.getOwners() == null || company.getOwners().size() < 1) {
             return false;
         }
 

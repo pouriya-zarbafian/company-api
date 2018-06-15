@@ -104,6 +104,12 @@ public class CompanyControllerTest extends AbstractTransactionalJUnit4SpringCont
 
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         assertEquals(company.getName(), createdCompany.getName());
+        assertEquals(company.getAddress(), createdCompany.getAddress());
+        assertEquals(company.getCity(), createdCompany.getCity());
+        assertEquals(company.getCountry(), createdCompany.getCountry());
+        assertEquals(company.getPhoneNumber(), createdCompany.getPhoneNumber());
+        assertEquals(company.getEmail(), createdCompany.getEmail());
+        // TODO: check owners
     }
 
     /**
@@ -125,8 +131,17 @@ public class CompanyControllerTest extends AbstractTransactionalJUnit4SpringCont
         ResponseEntity<Company> responseEntityUpdate =
                 restTemplate.exchange("/api/companies/" + company.getId(), HttpMethod.PUT, new HttpEntity<>(company), Company.class);
 
+        Company updatedCompany = responseEntityUpdate.getBody();
+
         assertEquals(HttpStatus.OK, responseEntityUpdate.getStatusCode());
         assertEquals(company.getName(), newName);
+        assertEquals(company.getName(), updatedCompany.getName());
+        assertEquals(company.getAddress(), updatedCompany.getAddress());
+        assertEquals(company.getCity(), updatedCompany.getCity());
+        assertEquals(company.getCountry(), updatedCompany.getCountry());
+        assertEquals(company.getPhoneNumber(), updatedCompany.getPhoneNumber());
+        assertEquals(company.getEmail(), updatedCompany.getEmail());
+        // TODO: check owners
     }
 
     /**
