@@ -83,7 +83,7 @@ public class CompanyController {
 
         Company existingCompany = companyService.findOne(id);
 
-        // specified company does not exist
+        // check that specified company exist
         if(existingCompany == null) {
             return new ResponseEntity<Company>(HttpStatus.BAD_REQUEST);
         }
@@ -134,6 +134,11 @@ public class CompanyController {
     public ResponseEntity<Void> deleteCompanyById(@PathVariable(value = "id") Long id) {
 
         LOGGER.debug(">> deleteCompanyById");
+
+        // id cannot be null
+        if(id == null) {
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        }
 
         companyService.delete(id);
 

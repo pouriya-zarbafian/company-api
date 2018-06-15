@@ -1,4 +1,3 @@
--- country
 INSERT INTO company(name, address, city, country, email, phone_number) VALUES('Nice Company', '1 Park Street', 'Nice', 'France', 'contact@company.com', '+33 321 321 11');
 INSERT INTO company(name, address, city, country, email, phone_number) VALUES('Another Company', '45 rue de Paris', 'Bordeaux', 'France', 'info@another.com', '+33 5566 7788');
 INSERT INTO owner(name) VALUES('John');

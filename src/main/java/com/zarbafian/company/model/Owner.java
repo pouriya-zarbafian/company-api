@@ -33,6 +33,17 @@ public class Owner {
     @Column(name = "name")
     private String name;
 
+    public Owner() {
+    }
+
+    public Owner(Long id) {
+        this.id = id;
+    }
+
+    public Owner(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Owner{" +

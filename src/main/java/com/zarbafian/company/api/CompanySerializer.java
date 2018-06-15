@@ -22,13 +22,28 @@ public class CompanySerializer extends StdSerializer<Company> {
     public void serialize(Company company, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
 
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeNumberField("id", company.getId());
-        jsonGenerator.writeStringField("name", company.getName());
-        jsonGenerator.writeStringField("address1", company.getAddress());
-        jsonGenerator.writeStringField("city", company.getCity());
-        jsonGenerator.writeObjectField("country", company.getCountry());
-        jsonGenerator.writeStringField("email", company.getEmail());
-        jsonGenerator.writeStringField("phone", company.getPhoneNumber());
+
+        if(company.getId() != null){
+            jsonGenerator.writeNumberField("id", company.getId());
+        }
+        if(company.getName() != null){
+            jsonGenerator.writeStringField("name", company.getName());
+        }
+        if(company.getAddress() != null){
+            jsonGenerator.writeStringField("address", company.getAddress());
+        }
+        if(company.getCity() != null){
+            jsonGenerator.writeStringField("city", company.getCity());
+        }
+        if(company.getCountry() != null){
+            jsonGenerator.writeObjectField("country", company.getCountry());
+        }
+        if(company.getEmail() != null){
+            jsonGenerator.writeStringField("email", company.getEmail());
+        }
+        if(company.getPhoneNumber() != null){
+            jsonGenerator.writeStringField("phone", company.getPhoneNumber());
+        }
 
         if(company.getOwners() != null) {
             jsonGenerator.writeArrayFieldStart("owners");
