@@ -55,7 +55,7 @@ public class CompanyController {
         }
 
         // check owners
-        if(!areValidOwners(company)) {
+        if(!isDataValid(company)) {
             return new ResponseEntity<Company>(HttpStatus.BAD_REQUEST);
         }
 
@@ -89,7 +89,7 @@ public class CompanyController {
         }
 
         // check owners
-        if(!areValidOwners(company)) {
+        if(!isDataValid(company)) {
             return new ResponseEntity<Company>(HttpStatus.BAD_REQUEST);
         }
 
@@ -136,7 +136,14 @@ public class CompanyController {
         LOGGER.debug(">> deleteCompanyById");
 
         // id cannot be null
-        if(id == null) {
+        if (id == null) {
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        }
+
+        Company existingEntity = companyService.findOne(id);
+
+        // target company must exist
+        if (existingEntity == null) {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         }
 
@@ -145,24 +152,6 @@ public class CompanyController {
         LOGGER.debug("<< deleteCompanyById");
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    private boolean areValidOwners(Company company) {
-
-        // at least one beneficial owner is required
-        if(company.getOwners().size() < 1) {
-            return false;
-        }
-
-        // check that the owners exists
-        for(Owner owner: company.getOwners()) {
-            Owner existingEntity = ownerService.findOne(owner.getId());
-            if(existingEntity == null) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     @RequestMapping(
@@ -206,5 +195,31 @@ public class CompanyController {
         LOGGER.debug("<< addOwnerToCompany");
 
         return new ResponseEntity<Company>(updatedEntity, HttpStatus.CREATED);
+    }
+
+    private boolean isDataValid(Company company) {
+
+        if(isNullOrEmpty(company.getName()) || isNullOrEmpty(company.getAddress()) || isNullOrEmpty(company.getCountry()) || isNullOrEmpty(company.getCity())) {
+            return false;
+        }
+
+        // at least one beneficial owner is required
+        if(company.getOwners().size() < 1) {
+            return false;
+        }
+
+        // check that the owners exists
+        for(Owner owner: company.getOwners()) {
+            Owner existingEntity = ownerService.findOne(owner.getId());
+            if(existingEntity == null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isNullOrEmpty(String s) {
+        return s == null || s.isEmpty();
     }
 }

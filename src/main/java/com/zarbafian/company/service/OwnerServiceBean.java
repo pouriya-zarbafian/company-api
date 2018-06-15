@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OwnerServiceBean implements OwnerService {
@@ -32,9 +33,15 @@ public class OwnerServiceBean implements OwnerService {
 
         LOGGER.debug(">> findOne : {}", id);
 
-        Owner owner = ownerRepository.getOne(id);
+        Owner owner = null;
 
-        LOGGER.debug("<< findOne : {}", owner);
+        Optional<Owner> optionalOwner = ownerRepository.findById(id);
+
+        if(optionalOwner.isPresent()) {
+            owner = optionalOwner.get();
+        }
+
+        LOGGER.debug("<< findOne : {}", owner==null?"null":owner);
 
         return owner;
     }
