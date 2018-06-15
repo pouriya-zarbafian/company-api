@@ -31,3 +31,8 @@ To update an existing company with id 1:
 To delete a company with id 2:
 
 `curl -X DELETE http://localhost:8080/api/companies/2`
+
+To add a beneficial owner with id 4 to the company with id 2:
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"id":4}' http://localhost:8080/api/companies/2/owners`
+
