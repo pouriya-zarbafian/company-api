@@ -47,3 +47,5 @@ This can be done by adding Spring authentication and configuring the appropriate
 ## High availability
 
 To achieve high-availability, both the database and the web server should be reduntant. Database redundancy can be achieved with a cluster of replicated and in-sync databases (e.g. HA-JDBC or Cassandra). Web server redundancy can be achieved by replicating the web server nodes. This would require a front load balancer to dispatch requests to the live nodes. To use this configuration with caching the server nodes must be configured to use a distributed cache such as Ehcache or Hazelcast.
+
+A single of point of failure remains in the load balancer. A floating IP such as those provided by DigitalOcean could then by assigned dynamically to one of the load balancers. This would improve further the availability of the system.
