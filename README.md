@@ -40,6 +40,10 @@ To search for a specific company with id 1:
 
 `curl http://localhost:8080/api/companies/1`
 
+To list all the available owners:
+
+`curl http://localhost:8080/api/owners`
+
 To create a new company:
 
 `curl -X POST -H 'Content-Type: application/json' -d '{"name":"Acme Company","address":"3 Place de Nancy","city":"Metz","country":"France","email":"info@acme.com","phone":"+33 1234 5678","owners":[{"id":4}]}' http://localhost:8080/api/companies`
