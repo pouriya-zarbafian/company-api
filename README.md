@@ -4,9 +4,9 @@ Sample project using Spring MVC and PostgreSQL to provide an API for managing a 
 
 ## Pre-requisite
 
-You need to have at least Java 8 installed [JDK 8] (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
+You need to have at least Java 8 installed [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 
-You also need a PostgreSQL database with at least version 9.4 [PostgreSQL] (https://www.postgresql.org/download/). Once installed, login as root and then as postgre and create a company user:
+You also need a PostgreSQL database with at least version 9.4 [PostgreSQL](https://www.postgresql.org/download/). Once installed, login as root and then as postgre and create a company user:
 
 `$ createuser --interactive`
 
