@@ -7,12 +7,19 @@ Sample project using Spring MVC and PostgreSQL to provide an API for managing a 
 You need to have at least Java 8 installed [JDK 8] (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 
 You also need a PostgreSQL database with at least version 9.4 [PostgreSQL] (https://www.postgresql.org/download/). Once installed, login as root and then as postgre and create a company user:
+
 `$ createuser --interactive`
+
 Then create a company database:
+
 `$ createdb -O company company`
+
 Set the password for the company user:
+
 `$ psql`
+
 `postgres=# ALTER USER company WITH PASSWORD 'YourPassword';`
+
 You will have to use the same password for the datasource in `application.properties`.
 
 ## Building a JAR with all dependencies
